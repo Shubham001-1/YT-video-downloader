@@ -21,10 +21,10 @@ const downloadVideo = async (urldoc,qualitydoc,formatdoc) => {
     }
   });
 
-    console.log('✅', response.data);
+    console.log( response.data);
   } catch (error) {
     
-    console.error('❌', error.response?.data || error.message);
+    console.error( error.response?.data || error.message);
   }
 };
 
