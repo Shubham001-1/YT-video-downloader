@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>YouTube Video Downloader</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #08223d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .container {
+      background: rgb(255, 255, 255);
+      padding: 2rem 3rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 500px;
+    }
+    h1 {
+      text-align: center;
+      color: #1e3a8a;
+      margin-bottom: 1rem;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1px solid #d1d5db;
+    }
+    button {
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background-color: #1e40af;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>YouTube Video Downloader</h1>
+
+    <form id="download-form">
+      <label for="url">Video URL</label>
+      <input type="text" id="url" name="url" placeholder="Enter YouTube video URL" required />
+
+      <label for="quality"> Select Video Quality</label>
+      <select id="quality" name="quality">
+        <option value="best">Best Available</option>
+        <option value="1080p">1080p</option>
+        <option value="720p">720p</option>
+        <option value="480p">480p</option>
+        <option value="360p">360p</option>
+      </select>
+
+      <label for="format"> Select Format</label>
+      <select id="format" name="format">
+        <option value="mp4">MP4 (Video)</option>
+        <option value="mp3">MP3 (Audio)</option>
+        <option value="webm">WEBM</option>
+      </select>
+
+      <button type="submit" id="sumbitbtn">⬇ Download</button>
+    </form>
+  </div>
+
+  <script>
+
+     const submitdoc = document.getElementById("sumbitbtn") ;
+     submitdoc.addEventListener("click",async ()=>{
+          const urldoc = document.getElementById("url").value ;
+    const qualitydoc = document.getElementById('quality').value ;
+     const formatdoc = document.getElementById("format").value ;
+      console.log(urldoc) ;
+        const res = await fetch('http://localhost:8000/downloadvideo', {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ urldoc, qualitydoc, formatdoc })
+        })
+       
+     })
+  </script>
+
+</body>
+</html>
